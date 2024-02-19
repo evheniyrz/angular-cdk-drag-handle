@@ -17,11 +17,14 @@ import { CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
 export class HostAttachedDirectiveWindowComponent {
   event: EventEmitter<string> = new EventEmitter();
   expanded = false;
+
   private hostHTMLElement: HTMLElement = inject(ElementRef).nativeElement;
-  destroyHost(): void {
+
+  public destroyHost(): void {
     this.event.emit('close');
   }
-  expandHostToggle(): void {
+
+  public hostFullScreenToggle(): void {
     this.expanded = !this.expanded;
 
     if (this.hostHTMLElement.classList.contains('full-screen')) {
@@ -32,7 +35,8 @@ export class HostAttachedDirectiveWindowComponent {
       // this.sdkDragDirective.disabled = true;
     }
   }
-  collapseHostToggle(): void {
+
+  public hostCollapseToggle(): void {
     if (this.hostHTMLElement.classList.contains('collapsed')) {
       this.hostHTMLElement.classList.remove('collapsed');
       // this.sdkDragDirective.disabled = false;
