@@ -5,7 +5,7 @@ import {
   OnInit,
   inject,
 } from '@angular/core';
-import { CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
+import { CdkDrag, CdkDragHandle, Point } from '@angular/cdk/drag-drop';
 import { DOCUMENT } from '@angular/common';
 @Component({
   selector: 'app-poup-window',
@@ -25,12 +25,19 @@ export class HostAttachedDirectiveWindowComponent implements OnInit {
   event: EventEmitter<string> = new EventEmitter();
   expanded = false;
 
-  private hostHTMLElement: HTMLElement = inject(ElementRef).nativeElement;
+  private _hostHTMLElement: HTMLElement = inject(ElementRef).nativeElement;
   private _document: Document = inject(DOCUMENT);
   private _cdkDrag: CdkDrag = inject(CdkDrag);
 
   ngOnInit(): void {
     this._cdkDrag.boundaryElement = this._document.body;
+    const x: number =
+      (this._document.body.clientWidth - this._hostHTMLElement.clientWidth) / 2;
+    const y: number =
+      (this._document.body.clientHeight - this._hostHTMLElement.clientHeight) /
+      2;
+    const point: Point = { x, y };
+    this._cdkDrag.freeDragPosition = point;
   }
 
   public destroyHost(): void {
@@ -40,21 +47,21 @@ export class HostAttachedDirectiveWindowComponent implements OnInit {
   public hostFullScreenToggle(): void {
     this.expanded = !this.expanded;
 
-    if (this.hostHTMLElement.classList.contains('full-screen')) {
-      this.hostHTMLElement.classList.remove('full-screen');
+    if (this._hostHTMLElement.classList.contains('full-screen')) {
+      this._hostHTMLElement.classList.remove('full-screen');
       // this.sdkDragDirective.disabled = false;
     } else {
-      this.hostHTMLElement.classList.add('full-screen');
+      this._hostHTMLElement.classList.add('full-screen');
       // this.sdkDragDirective.disabled = true;
     }
   }
 
   public hostCollapseToggle(): void {
-    if (this.hostHTMLElement.classList.contains('collapsed')) {
-      this.hostHTMLElement.classList.remove('collapsed');
+    if (this._hostHTMLElement.classList.contains('collapsed')) {
+      this._hostHTMLElement.classList.remove('collapsed');
       // this.sdkDragDirective.disabled = false;
     } else {
-      this.hostHTMLElement.classList.add('collapsed');
+      this._hostHTMLElement.classList.add('collapsed');
       // this.sdkDragDirective.disabled = true;
     }
   }
