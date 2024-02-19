@@ -26,7 +26,9 @@ export class PopupWindowCallerComponent implements OnInit {
   }
 
   attachPopup(): void {
-    this.cdkPortal.attachComponentPortal(this.componentPortal);
+    if (!this.cdkPortal.hasAttached()) {
+      this.cdkPortal.attachComponentPortal(this.componentPortal);
+    }
   }
 
   ngOnInit(): void {
