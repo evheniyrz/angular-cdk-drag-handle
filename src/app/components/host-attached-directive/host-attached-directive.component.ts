@@ -1,5 +1,12 @@
-import { Component, ElementRef, EventEmitter, inject } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  OnInit,
+  inject,
+} from '@angular/core';
 import { CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
+import { DOCUMENT } from '@angular/common';
 @Component({
   selector: 'app-poup-window',
   standalone: true,
@@ -7,18 +14,24 @@ import { CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
   hostDirectives: [
     {
       directive: CdkDrag,
-      // inputs: ['cdkDragBoundary:".popup-parent"'],
+      // inputs: ['cdkDragBoundary:""'],
     },
   ],
   outputs: ['destroyPopup'],
   templateUrl: './host-attached-directive.component.html',
   styleUrl: './host-attached-directive.component.scss',
 })
-export class HostAttachedDirectiveWindowComponent {
+export class HostAttachedDirectiveWindowComponent implements OnInit {
   event: EventEmitter<string> = new EventEmitter();
   expanded = false;
 
   private hostHTMLElement: HTMLElement = inject(ElementRef).nativeElement;
+  private _document: Document = inject(DOCUMENT);
+  private _cdkDrag: CdkDrag = inject(CdkDrag);
+
+  ngOnInit(): void {
+    this._cdkDrag.boundaryElement = this._document.body;
+  }
 
   public destroyHost(): void {
     this.event.emit('close');
