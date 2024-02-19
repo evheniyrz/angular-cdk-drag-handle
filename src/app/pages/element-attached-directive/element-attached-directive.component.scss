@@ -1,0 +1,32 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .drag-directive-container {
+    // position: relative;
+    display: flex;
+    flex-flow: column nowrap;
+    width: 500px;
+    height: 500px;
+    border: 2px solid royalblue;
+    border-radius: 10px;
+    overflow: hidden;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-align: center;
+    resize: both;
+
+    .drag-handler {
+      height: 75px;
+      background-color: cadetblue;
+      cursor: move;
+    }
+
+    .popup-content {
+      flex: 1 0;
+      color: aquamarine;
+      background-color: bisque;
+    }
+  }
+}

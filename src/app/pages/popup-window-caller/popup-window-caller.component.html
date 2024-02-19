@@ -1,0 +1,10 @@
+<div class="portal-outlet">
+  <ng-template
+    (attached)="recieveReference($event)"
+    cdkPortalOutlet
+  ></ng-template>
+</div>
+
+<button mat-raised-button color="primary" (click)="attachPopup()">
+  open popup
+</button>

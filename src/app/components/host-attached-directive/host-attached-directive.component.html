@@ -1,0 +1,34 @@
+<header cdkDragHandle>
+  <img
+    src="https://png.pngtree.com/element_pic/00/16/07/06577d261edb9ec.jpg"
+    width="44"
+    height="44"
+    alt="poup-logo"
+    class="logo"
+  />
+  <div class="actions-block">
+    <button (click)="collapseHostToggle()">
+      <span class="material-icons"> horizontal_rule </span>
+    </button>
+    <button (click)="expandHostToggle()">
+      @if(expanded){
+      <span class="material-icons">filter_none</span>
+      }@else{
+      <span class="material-icons"> crop_square </span>
+      }
+    </button>
+    <button (click)="destroyHost()">
+      <span class="material-icons"> clear </span>
+    </button>
+  </div>
+</header>
+<div class="main-content">
+  <ng-container *ngTemplate></ng-container>
+</div>
+<!-- <ng-template #list let-content>
+  <app-drag-and-drop-list></app-drag-and-drop-list>
+</ng-template>
+
+<ng-template #form let-content>
+  <app-update-list-form></app-update-list-form>
+</ng-template> -->
