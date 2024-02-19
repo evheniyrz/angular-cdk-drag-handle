@@ -53,6 +53,9 @@
     border-top: 0;
     overflow-y: auto;
     padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     &::after {
       position: absolute;
@@ -63,6 +66,12 @@
       bottom: 0;
       right: 0;
       z-index: 1;
+    }
+
+    img {
+      width: 400px;
+      height: 400px;
+      filter: drop-shadow(0 0 10px #000);
     }
   }
 }
