@@ -1,0 +1,49 @@
+<header cdkDragHandle>
+    <h1 cdkMenuBar>
+        <span class="circle" [ngClass]="config.colorLableValue"></span><span class="title">{{ config.title }}</span>
+        <!-- This button triggers the menu and is it's origin -->
+        <button mat-icon-button type="button" cdkMenuItem [cdkMenuTriggerFor]="actionList" [cdkMenuPosition]="[
+          {
+            originX: 'end',
+            originY: 'bottom',
+            overlayX: 'end',
+            overlayY: 'top'
+          }
+        ]" class="overly-trigger-button">
+            <mat-icon>more_horiz</mat-icon>
+        </button>
+        <!-- This template displays the menu content and is connected to the button -->
+        <ng-template #actionList>
+            <ul class="action-list mat-elevation-z8" cdkMenu>
+                <li cdkMenuItem>
+                    <button mat-button class="edit-button">
+                        Edit Column <mat-icon>edit</mat-icon>
+                    </button>
+                </li>
+                <li cdkMenuItem>
+                    <button mat-button (click)="hideColumn()" class="hide-button">
+                        Hide Column <mat-icon>visibility_off</mat-icon>
+                    </button>
+                </li>
+                <li cdkMenuItem>
+                    <button mat-button (click)="deleteColumn()" class="delete-button">
+                        Delete Column <mat-icon>delete</mat-icon>
+                    </button>
+                </li>
+            </ul>
+        </ng-template>
+    </h1>
+    <p class="description">{{ config.description }}</p>
+</header>
+<!-- drag drop list -->
+<div class="item-list-container">
+    <div cdkDropList [cdkDropListData]="selectedItems" (cdkDropListDropped)="drop($event)" [id]="config.columnId"
+        class="item-list">
+    </div>
+</div>
+<!-- drag drop list end-->
+
+<!-- <button mat-button type="button" (click)="attachList()" class="add-item-button">
+    <mat-icon>add</mat-icon> Add Item
+  </button> -->
+<div class="column-placeholder" *cdkDragPlaceholder></div>

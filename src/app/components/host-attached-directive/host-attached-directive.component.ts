@@ -5,12 +5,23 @@ import {
   OnInit,
   inject,
 } from '@angular/core';
-import { CdkDrag, CdkDragHandle, Point } from '@angular/cdk/drag-drop';
-import { DOCUMENT } from '@angular/common';
+import { CdkDrag, CdkDragDrop, CdkDragHandle, CdkDropList, CdkDropListGroup, Point, moveItemInArray } from '@angular/cdk/drag-drop';
+import { AsyncPipe, DOCUMENT, NgTemplateOutlet } from '@angular/common';
+import { ItemColumnComponent } from '../item-column/item-column.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { BehaviorSubject } from 'rxjs';
+import { ColumnConfig } from '../models/column-config.model';
 @Component({
   selector: 'app-poup-window',
   standalone: true,
-  imports: [CdkDrag, CdkDragHandle],
+  imports: [CdkDrag,
+    AsyncPipe,
+    NgTemplateOutlet,
+    MatButtonModule,
+    CdkDropList,
+    CdkDropListGroup,
+    MatIconModule, CdkDragHandle, ItemColumnComponent],
   hostDirectives: [
     {
       directive: CdkDrag,
@@ -24,12 +35,18 @@ import { DOCUMENT } from '@angular/common';
 export class HostAttachedDirectiveWindowComponent implements OnInit {
   event: EventEmitter<string> = new EventEmitter();
   expanded = false;
+  columnConfigArray: Array<ColumnConfig> = Array.from({ length: 5 }, (_, index) => { return {colorLableValue:'green', title:`testDrive-${index + 1}`, description: `test drive#${index + 1}`, columnId: `testDrive-${index + 1}`}});
 
   private _hostHTMLElement: HTMLElement = inject(ElementRef).nativeElement;
   private _document: Document = inject(DOCUMENT);
   private _cdkDrag: CdkDrag = inject(CdkDrag);
+  private _positionState: BehaviorSubject<Point> = new BehaviorSubject({
+    x: 0,
+    y: 0,
+  });
 
   ngOnInit(): void {
+    // console.log('%c CREATE COLUMN CONFIG ', 'color:green;background:white', {cl: this.columnConfigArray});
     this._cdkDrag.boundaryElement = this._document.body;
     const x: number =
       (this._document.body.clientWidth - this._hostHTMLElement.clientWidth) / 2;
@@ -40,6 +57,11 @@ export class HostAttachedDirectiveWindowComponent implements OnInit {
     this._cdkDrag.freeDragPosition = point;
   }
 
+  dropColumn(event: CdkDragDrop<any[]>) {
+    // console.log('%c DRAG COLUMN ', 'color:green;background:white', { event });
+    moveItemInArray(this.columnConfigArray, event.previousIndex, event.currentIndex);
+  }
+
   public destroyHost(): void {
     this.event.emit('close');
   }
@@ -47,22 +69,28 @@ export class HostAttachedDirectiveWindowComponent implements OnInit {
   public hostFullScreenToggle(): void {
     this.expanded = !this.expanded;
 
-    if (this._hostHTMLElement.classList.contains('full-screen')) {
-      this._hostHTMLElement.classList.remove('full-screen');
-      // this.sdkDragDirective.disabled = false;
+    if (this._hostHTMLElement?.classList.contains('full-screen')) {
+      this._hostHTMLElement?.classList.remove('full-screen');
     } else {
-      this._hostHTMLElement.classList.add('full-screen');
-      // this.sdkDragDirective.disabled = true;
+      this._hostHTMLElement?.classList.add('full-screen');
     }
   }
 
   public hostCollapseToggle(): void {
-    if (this._hostHTMLElement.classList.contains('collapsed')) {
-      this._hostHTMLElement.classList.remove('collapsed');
-      // this.sdkDragDirective.disabled = false;
+    if (this._hostHTMLElement?.classList.contains('collapsed')) {
+      this._hostHTMLElement?.classList.remove('collapsed');
+      this._cdkDrag.setFreeDragPosition(this._positionState.getValue());
     } else {
-      this._hostHTMLElement.classList.add('collapsed');
-      // this.sdkDragDirective.disabled = true;
+      this._hostHTMLElement?.classList.add('collapsed');
+
+      this._positionState.next({
+        ...this._cdkDrag.getFreeDragPosition(),
+      });
+
+      this._cdkDrag.setFreeDragPosition({
+        x: 10,
+        y: 0,
+      });
     }
   }
 }
