@@ -1,11 +1,4 @@
 import { Component, Input, OnDestroy, OnInit, inject } from '@angular/core';
-// import {
-//   BooksBoardActions,
-//   IBook,
-//   IBookColumnItemCollection,
-//   IBooksBoard,
-//   selectColumnsItems,
-// } from '../../../../store';
 import { AsyncPipe, NgClass } from '@angular/common';
 import {
   CdkMenu,
@@ -15,9 +8,6 @@ import {
 } from '@angular/cdk/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-// import { Store } from '@ngrx/store';
-// import { PopupPortalService } from '../popup-portal/service/popup-portal.service';
-// import { BookCardComponent } from '../book-card/book-card.component';
 import { Subject } from 'rxjs';
 import {
   CdkDrag,
@@ -46,11 +36,18 @@ import { ColumnConfig } from '../models/column-config.model';
     CdkMenuBar,
     MatButtonModule,
     MatIconModule,
-    // BookCardComponent,
     CdkDragHandle,
   ],
   templateUrl: './item-column.component.html',
-  styleUrl: './item-column.component.scss'
+  styleUrl: './item-column.component.scss',
+  hostDirectives:[
+    {
+      directive: CdkDrag,
+      inputs:[
+        'cdkDragBoundary:"#boardDraggableContent"'
+      ]
+    }
+  ]
 })
 export class ItemColumnComponent implements OnInit {
   isOpen = false;

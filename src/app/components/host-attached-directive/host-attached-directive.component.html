@@ -22,7 +22,7 @@
     cdkDropListOrientation="horizontal" (cdkDropListDropped)="dropColumn($event)">
 
     @for(column of columnConfigArray; track column){
-    <app-item-column [config]="column" cdkDragBoundary="#boardDraggableContent" cdkDrag
+    <app-item-column [config]="column"
       [id]="column.columnId"></app-item-column>
     }
 

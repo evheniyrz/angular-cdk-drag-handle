@@ -25,7 +25,9 @@ import { ColumnConfig } from '../models/column-config.model';
   hostDirectives: [
     {
       directive: CdkDrag,
-      // inputs: ['cdkDragBoundary:""'],
+      inputs:[
+        'cdkDragBoundary:"body"' // doesn't work. see line:52 inside ngOninit method
+      ]
     },
   ],
   outputs: ['destroyPopup'],
@@ -46,8 +48,9 @@ export class HostAttachedDirectiveWindowComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    // console.log('%c CREATE COLUMN CONFIG ', 'color:green;background:white', {cl: this.columnConfigArray});
-    this._cdkDrag.boundaryElement = this._document.body;
+ 
+    // this._cdkDrag.boundaryElement = 'body'; // !!!it works this way!!!
+
     const x: number =
       (this._document.body.clientWidth - this._hostHTMLElement.clientWidth) / 2;
     const y: number =
@@ -58,7 +61,6 @@ export class HostAttachedDirectiveWindowComponent implements OnInit {
   }
 
   dropColumn(event: CdkDragDrop<any[]>) {
-    // console.log('%c DRAG COLUMN ', 'color:green;background:white', { event });
     moveItemInArray(this.columnConfigArray, event.previousIndex, event.currentIndex);
   }
 
