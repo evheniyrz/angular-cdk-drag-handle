@@ -8,4 +8,10 @@ import { Component } from '@angular/core';
   templateUrl: './element-attached-directive.component.html',
   styleUrl: './element-attached-directive.component.scss',
 })
-export class ElementAttachedDirectiveComponent {}
+export class ElementAttachedDirectiveComponent {
+  templateContentString = `
+  <div class="drag-directive-container" cdkDrag cdkDragBoundary="body">
+    <div class="drag-handler" cdkDragHandle>awesome drag handle</div>
+  </div>
+  `;
+}

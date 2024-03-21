@@ -1,7 +1,13 @@
 <div class="drag-directive-container" cdkDrag cdkDragBoundary="body">
-  <div class="drag-handler" cdkDragHandle>awesome drag handle</div>
+  <div class="drag-handler" cdkDragHandle>
+    <p>awesome drag handle</p>
+    <p>the directive's input property - "<b>cdkDragBoundary"</b> is set directly on the element</p>
+  </div>
   <div class="popup-content">
     <p>awesome content</p>
+    <code>
+      <pre>{{templateContentString}}</pre>
+    </code>
     <img src="/assets/93b5c79f073306f7bb3172d7db69d19c.png" alt="" />
   </div>
 </div>

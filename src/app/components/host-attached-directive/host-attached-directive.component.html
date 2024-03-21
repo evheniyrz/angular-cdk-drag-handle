@@ -21,11 +21,16 @@
   <div class="board-draggable-content" id="boardDraggableContent" cdkDropListGroup cdkDropList
     cdkDropListOrientation="horizontal" (cdkDropListDropped)="dropColumn($event)">
 
-    @for(column of columnConfigArray; track column){
+    <!-- @for(column of columnConfigArray; track column){
     <app-item-column [config]="column"
       [id]="column.columnId"></app-item-column>
-    }
+    } -->
+    <code>
 
+      <pre>{{templateContentString}}</pre>
+
+    </code>
+		<img src="/assets/5e209b2e16a321acb3c53b1bc84e3bf6.png" alt="emo">
   </div>
 
 </div>
