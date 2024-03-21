@@ -78,8 +78,8 @@
 
     &.collapsed,
     &.full-screen.collapsed {
-      height: 50px;
-      width: 300px;
+      height: 50px !important;
+      width: 300px !important;
       top: unset;
       bottom: 0;
       left: 0;
