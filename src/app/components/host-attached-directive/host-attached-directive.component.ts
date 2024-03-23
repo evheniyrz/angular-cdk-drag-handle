@@ -26,7 +26,7 @@ import { ColumnConfig } from '../models/column-config.model';
     {
       directive: CdkDrag,
       inputs:[
-        'cdkDragBoundary'
+        'cdkDragBoundary:"body"' // doesn't work. see line:62 inside ngOninit method
       ]
     },
   ],
@@ -36,7 +36,6 @@ import { ColumnConfig } from '../models/column-config.model';
 })
 export class HostAttachedDirectiveWindowComponent implements OnInit {
   event: EventEmitter<string> = new EventEmitter();
-
   expanded = false;
   columnConfigArray: Array<ColumnConfig> = Array.from({ length: 5 }, (_, index) => { return {colorLableValue:'green', title:`testDrive-${index + 1}`, description: `test drive#${index + 1}`, columnId: `testDrive-${index + 1}`}});
   templateContentString= `@Component({
