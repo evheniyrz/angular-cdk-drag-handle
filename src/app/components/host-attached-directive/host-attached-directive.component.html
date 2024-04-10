@@ -1,11 +1,6 @@
 <header cdkDragHandle>
-  <img
-    src="https://png.pngtree.com/element_pic/00/16/07/06577d261edb9ec.jpg"
-    width="44"
-    height="44"
-    alt="poup-logo"
-    class="logo"
-  />
+  <img src="https://png.pngtree.com/element_pic/00/16/07/06577d261edb9ec.jpg" width="44" height="44" alt="poup-logo"
+    class="logo" />
   <div class="actions-block">
     <button (click)="hostCollapseToggle()">
       <span class="material-icons"> horizontal_rule </span>
@@ -23,18 +18,19 @@
   </div>
 </header>
 <div class="main-content">
-  <div
-    class="board-draggable-content"
-    id="boardDraggableContent"
-    cdkDropListGroup
-    cdkDropList
-    cdkDropListOrientation="horizontal"
-    (cdkDropListDropped)="dropColumn($event)"
-  >
-    @for(column of columnConfigArray; track column){
-    <app-item-column [config]="column" [id]="column.columnId"></app-item-column>
-    }
+  <div class="board-draggable-content" id="boardDraggableContent" cdkDropListGroup cdkDropList
+    cdkDropListOrientation="horizontal" (cdkDropListDropped)="dropColumn($event)">
 
-    <img src="/assets/5e209b2e16a321acb3c53b1bc84e3bf6.png" alt="emo" />
+    <!-- @for(column of columnConfigArray; track column){
+    <app-item-column [config]="column"
+      [id]="column.columnId"></app-item-column>
+    } -->
+    <code>
+
+      <pre>{{templateContentString}}</pre>
+
+    </code>
+		<img src="/assets/5e209b2e16a321acb3c53b1bc84e3bf6.png" alt="emo">
   </div>
+
 </div>

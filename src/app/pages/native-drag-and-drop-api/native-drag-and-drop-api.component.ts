@@ -34,13 +34,13 @@ export class NativeDragAndDropApiComponent implements AfterViewInit, OnDestroy {
   private onDestroy$: Subject<void> = new Subject();
 
   ngAfterViewInit(): void {
-    const itemCollection = this.sourceContainer.nativeElement.children;
+    const itemCollection: HTMLCollection = this.sourceContainer.nativeElement.children;
 
     for (const key in itemCollection) {
       if (Object.hasOwnProperty.call(itemCollection, key)) {
         const element = itemCollection[key];
 
-        element.id = `${element.className}-${key}`;
+        element.id = `${element.className}-${Number(key) + 1}`;
       }
     }
     this.sourceContainer.nativeElement.addEventListener(
