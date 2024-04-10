@@ -34,7 +34,8 @@ export class NativeDragAndDropApiComponent implements AfterViewInit, OnDestroy {
   private onDestroy$: Subject<void> = new Subject();
 
   ngAfterViewInit(): void {
-    const itemCollection: HTMLCollection = this.sourceContainer.nativeElement.children;
+    const itemCollection: HTMLCollection =
+      this.sourceContainer.nativeElement.children;
 
     for (const key in itemCollection) {
       if (Object.hasOwnProperty.call(itemCollection, key)) {
@@ -75,6 +76,39 @@ export class NativeDragAndDropApiComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.sourceContainer.nativeElement.removeEventListener(
+      'dragstart',
+      dragStartHandler
+    );
+    this.sourceContainer.nativeElement.removeEventListener(
+      'dragover',
+      dragOverSort
+    );
+    this.sourceContainer.nativeElement.removeEventListener(
+      'drop',
+      dropHandler,
+      {
+        capture: true,
+      }
+    );
+    this.sourceContainer.nativeElement.removeEventListener(
+      'dragend',
+      dragEndHandler
+    );
+
+    this.targetContainer.nativeElement.removeEventListener(
+      'dragstart',
+      dragStartHandler
+    );
+    this.targetContainer.nativeElement.removeEventListener(
+      'dragover',
+      dragOverSort
+    );
+    this.targetContainer.nativeElement.removeEventListener('drop', dropHandler);
+    this.targetContainer.nativeElement.removeEventListener(
+      'dragend',
+      dragEndHandler
+    );
     this.onDestroy$.next();
     this.onDestroy$.complete();
   }
