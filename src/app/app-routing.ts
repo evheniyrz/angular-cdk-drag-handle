@@ -16,6 +16,13 @@ export const routes: Routes = [
       ).then((c) => c.ElementAttachedDirectiveComponent),
   },
   {
+    path: 'native-dnd-api',
+    loadComponent: () =>
+      import(
+        './pages/native-drag-and-drop-api/native-drag-and-drop-api.component'
+      ).then((c) => c.NativeDragAndDropApiComponent),
+  },
+  {
     path: '**',
     redirectTo: '',
     pathMatch: 'full',
