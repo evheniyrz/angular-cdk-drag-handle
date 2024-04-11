@@ -26,7 +26,7 @@ import { ColumnConfig } from '../models/column-config.model';
     {
       directive: CdkDrag,
       inputs:[
-        'cdkDragBoundary:"body"' // doesn't work. see line:62 inside ngOninit method
+        'cdkDragBoundary'
       ]
     },
   ],
@@ -38,16 +38,7 @@ export class HostAttachedDirectiveWindowComponent implements OnInit {
   event: EventEmitter<string> = new EventEmitter();
   expanded = false;
   columnConfigArray: Array<ColumnConfig> = Array.from({ length: 5 }, (_, index) => { return {colorLableValue:'green', title:`testDrive-${index + 1}`, description: `test drive#${index + 1}`, columnId: `testDrive-${index + 1}`}});
-  templateContentString= `@Component({
-          hostDirectives: [
-            {
-              directive: CdkDrag,
-              inputs:[
-                'cdkDragBoundary:"body"' //!!doesn't work
-              ]
-            },
-          ],
-        })`
+
 
   private _hostHTMLElement: HTMLElement = inject(ElementRef).nativeElement;
   private _document: Document = inject(DOCUMENT);
@@ -59,7 +50,7 @@ export class HostAttachedDirectiveWindowComponent implements OnInit {
 
   ngOnInit(): void {
  
-    // this._cdkDrag.boundaryElement = 'body'; // !!!it works this way!!!
+    this._cdkDrag.boundaryElement = 'body'; 
 
     const x: number =
       (this._document.body.clientWidth - this._hostHTMLElement.clientWidth) / 2;
