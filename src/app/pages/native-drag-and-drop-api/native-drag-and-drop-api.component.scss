@@ -71,9 +71,20 @@
   }
 
   .drag-item.dragged > *,
-  .drag-item.dragged::after,
-  .drag-item.dragged::before {
+  .drag-item.dragged::after {
     visibility: hidden;
+  }
+
+  .drag-item.dragged::before {
+    content: 'PLACEHOLDER';
+    border: 2px dashed darkgray;
+    width: min-content;
+    aspect-ratio: unset;
+    border-radius: unset;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 5px;
   }
 
   .drag-item:active {
