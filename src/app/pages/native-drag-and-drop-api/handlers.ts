@@ -58,16 +58,6 @@ export const dragOverSort = function (this: any, ev: DragEvent) {
       (item) => item.id === currentOverlappedElement.id
     );
 
-    console.log('DRAGOVER', {
-      t: this,
-      ev: ev.target,
-      currentDraggableElement,
-      currentOverlappedElement,
-      currentDraggableElementIndex,
-      overlappedElementIndex,
-      currentItemList,
-    });
-
     if (
       currentDraggableElementIndex - 1 === overlappedElementIndex ||
       currentDraggableElementIndex + 1 === overlappedElementIndex
