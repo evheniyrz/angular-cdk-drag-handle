@@ -1,5 +1,11 @@
+import {
+  ChangeDetectorRef,
+  EnvironmentInjector,
+  inject,
+  runInInjectionContext,
+} from '@angular/core';
+
 export function dragStartHandler(ev: DragEvent) {
-  console.log('DRAGSTART', { ev });
   ev.dataTransfer!.effectAllowed = 'move';
   ev.dataTransfer!.clearData();
   ev.dataTransfer!.setData('text', (ev.target as HTMLElement)['id']);
@@ -106,8 +112,7 @@ export function dragEndHandler(this: any, ev: DragEvent) {
 
 export function dropHandler(this: any, ev: DragEvent) {
   ev.preventDefault();
-
-  if (ev.target === this) {
+  if (ev.target === this && !!!ev.dataTransfer?.files.length) {
     const data = ev.dataTransfer!.getData('text');
     const draggedElement = document.getElementById(data);
 
@@ -116,5 +121,36 @@ export function dropHandler(this: any, ev: DragEvent) {
       ev.dataTransfer!.clearData();
     }
     draggedElement!.classList.remove('dragged');
+  } else if (!!ev.dataTransfer?.files.length) {
+    const that = this;
+
+    const div = document.createElement('div');
+    div.classList.add('drag-item');
+    div.setAttribute('draggable', 'true');
+    div.id = !!this.children.length
+      ? `upload-item-${this.children.length}`
+      : `upload-item-0`;
+
+    const img = document.createElement('img');
+    img.width = 70;
+    img.height = 70;
+
+    const divDescr = document.createElement('div');
+    divDescr.classList.add('description');
+    const p = document.createElement('p');
+    p.innerText = 'some awesome description';
+    divDescr.appendChild(p);
+
+    const reader = new FileReader();
+    reader.onload = function (readerEvent) {
+      img.src = readerEvent.target?.result as string;
+      div.appendChild(img);
+      div.appendChild(divDescr);
+
+      that.insertAdjacentElement('afterbegin', div);
+      // change.markForCheck();
+      console.log('CHIDREN', { ch: that.children });
+    };
+    reader.readAsDataURL(ev.dataTransfer.files.item(0)!);
   }
 }
