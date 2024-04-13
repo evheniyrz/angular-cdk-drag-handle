@@ -1,0 +1,35 @@
+<div class="drop-list" CdkDropListGroup>
+    <div
+      class="drag-drop-container"
+      id="sourceContainer"
+      #sourceContainer
+      cdkDropList
+      [cdkDropListData]="itemList"
+      cdkDropListOrientation="horizontal"
+      (cdkDropListDropped)="drop($event)"
+    >
+      @for(item of itemList; track item;let idx = $index){
+      <div
+        class="drag-item"
+        [id]="'drag-item' + idx"
+        cdkDrag
+        [cdkDragData]="item"
+        #cdkDragRef="cdkDrag"
+      >
+        <img [src]="item.src" alt="" width="70" height="70" />
+        <div class="description">
+          <p>{{ item.description }}</p>
+        </div>
+      </div>
+      }
+    </div>
+    <div
+      class="target-drop-container"
+      id="targetContainer"
+      #targetContainer
+      cdkDropList
+      cdkDropListOrientation="horizontal"
+      (cdkDropListDropped)="dropTarget($event)"
+    ></div>
+  </div>
+  

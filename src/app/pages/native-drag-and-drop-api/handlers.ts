@@ -107,7 +107,7 @@ export function dragEndHandler(this: any, ev: DragEvent) {
 export function dropHandler(this: any, ev: DragEvent) {
   ev.preventDefault();
 
-  if (ev.target === this) {
+  if (ev.target === this && !!!ev.dataTransfer!.files.length) {
     const data = ev.dataTransfer!.getData('text');
     const draggedElement = document.getElementById(data);
 
@@ -116,5 +116,29 @@ export function dropHandler(this: any, ev: DragEvent) {
       ev.dataTransfer!.clearData();
     }
     draggedElement!.classList.remove('dragged');
+  } else if(!!ev.dataTransfer!.files.length) {
+    console.log('FILES', {F: ev.dataTransfer!.files});
+    const img = document.createElement('img');
+    const div = document.createElement('div');
+    div.classList.add('drag-item');
+    div.setAttribute('draggable', 'true');
+    if(this.children.length){
+      div.id= `drag-item-${this.children.length}img`;
+    } else {
+      div.id= `drag-item-0img`;
+    }
+    const reader = new FileReader();
+		reader.onload = function(e: ProgressEvent<FileReader>) {
+      
+        img.style.width= '100%';
+        img.style.objectFit = 'cover';
+				img.src=e.target!.result as string;
+        div.appendChild(img);
+        
+		}
+		reader.readAsDataURL(ev.dataTransfer!.files.item(0)!);
+    const currentItemList = Array.from(this.children);
+    currentItemList.push(div);
+    this.replaceChildren(...currentItemList);
   }
 }
