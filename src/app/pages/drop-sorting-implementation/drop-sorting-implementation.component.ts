@@ -12,7 +12,7 @@ import { CdkDrag, CdkDropList, CdkDropListGroup, CdkDragDrop } from '@angular/cd
 })
 export class DropSortingImplementationComponent {
   public itemList: DropItem[] = DROP_ITEM_LIST;
-  
+
   private cdkDrag: CdkDrag = inject(CdkDrag);
 
   // @ViewChild('cdkDragRef', { read: CdkDrag })
@@ -20,7 +20,7 @@ export class DropSortingImplementationComponent {
 
   drop(event: CdkDragDrop<DropItem[]>): void {
     if (event.container === event.previousContainer) {
-      console.log('IN SAME', { event, dr: this.cdkDrag });
+      console.log('IN SAME', { crr: event.currentIndex, prev: event.previousIndex, dr: this.cdkDrag });
     
     }
   }
