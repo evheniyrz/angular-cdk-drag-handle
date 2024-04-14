@@ -2,7 +2,6 @@
     <div
       class="drag-drop-container"
       id="sourceContainer"
-      #sourceContainer
       cdkDropList
       [cdkDropListData]="itemList"
       cdkDropListOrientation="horizontal"
@@ -26,8 +25,8 @@
     <div
       class="target-drop-container"
       id="targetContainer"
-      #targetContainer
       cdkDropList
+      [cdkDropListData]="targetItems"
       cdkDropListOrientation="horizontal"
       (cdkDropListDropped)="dropTarget($event)"
     ></div>
