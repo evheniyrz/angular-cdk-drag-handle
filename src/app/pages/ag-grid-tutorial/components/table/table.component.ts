@@ -28,7 +28,7 @@ export class TableComponent {
  
   // Column Definitions: Defines the columns to be displayed.
   colDefs: ColDef[] = [
-    { field: "make" },
+    { field: "make", checkboxSelection: true, },
     { field: "model" },
     { field: "price" },
     { field: "electric" }
