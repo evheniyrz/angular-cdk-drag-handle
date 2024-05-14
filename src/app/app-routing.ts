@@ -15,12 +15,26 @@ export const routes: Routes = [
   //       './pages/element-attached-directive/element-attached-directive.component'
   //     ).then((c) => c.ElementAttachedDirectiveComponent),
   // },
+  // {
+  //   path: '',
+  //   loadComponent: () =>
+  //     import(
+  //       './pages/drop-sorting-implementation/drop-sorting-implementation.component'
+  //     ).then((c) => c.DropSortingImplementationComponent),
+  // },
   {
     path: '',
     loadComponent: () =>
       import(
-        './pages/drop-sorting-implementation/drop-sorting-implementation.component'
-      ).then((c) => c.DropSortingImplementationComponent),
+        './pages/native-drag-and-drop-api/native-drag-and-drop-api.component'
+      ).then((c) => c.NativeDragAndDropApiComponent),
+  },
+  {
+    path: 'ag-grid',
+    loadComponent: () =>
+      import(
+        './pages/ag-grid-tutorial/ag-grid-tutorial.component'
+      ).then((c) => c.AgGridTutorialComponent),
   },
   {
     path: '**',

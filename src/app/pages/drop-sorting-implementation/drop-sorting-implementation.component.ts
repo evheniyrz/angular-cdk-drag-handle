@@ -8,13 +8,13 @@ import { CdkDrag, CdkDropList, CdkDropListGroup, CdkDragDrop } from '@angular/cd
   imports: [ CdkDrag, CdkDropList, CdkDropListGroup],
   templateUrl: './drop-sorting-implementation.component.html',
   styleUrl: './drop-sorting-implementation.component.scss',
-  providers:[CdkDrag]
+  providers:[]
 })
 export class DropSortingImplementationComponent {
   public itemList: DropItem[] = DROP_ITEM_LIST;
   public targetItems: DropItem[] =[];
 // constructor(private cdkDrag: CdkDrag){}
-  private cdkDrag: CdkDrag = inject(CdkDrag); ///**** HERE*** */
+
 
   // @ViewChild(CdkDrag, { read: CdkDrag })
   // cdkDragRef!: CdkDrag;
@@ -24,7 +24,6 @@ export class DropSortingImplementationComponent {
       console.log('IN SAME', { 
         crr: event.currentIndex, // with multiline content - index is incorrect
         prev: event.previousIndex, // with multiline content - index is incorrect
-        dr: this.cdkDrag 
       });
     
     }
