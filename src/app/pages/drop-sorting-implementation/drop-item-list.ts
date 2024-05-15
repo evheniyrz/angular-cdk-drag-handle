@@ -6,27 +6,27 @@ export interface DropItem {
 export const DROP_ITEM_LIST = [
   {
     src: 'assets/lifetime.jpg',
-    description: 'some awesome description',
+    description: 'lifetime clock',
   },
   {
     src: 'assets/self-supporting.jpg',
-    description: 'some awesome description',
+    description: 'bridge',
   },
   {
     src: 'assets/the-architect-Erik-Johansson.jpg',
-    description: 'some awesome description',
+    description: 'wooden house',
   },
   {
     src: 'assets/TheLightKeeper_ErikJohansson.jpg',
-    description: 'some awesome description',
+    description: 'lighthouse',
   },
   {
     src: 'assets/xNmhCasJuW4.jpg',
-    description: 'some awesome description',
+    description: 'happy child',
   },
   {
     src: 'assets/344296348_n.jpg',
-    description: 'some awesome description',
+    description: 'piramide set',
   },
   {
     src: 'assets/68754961_n.jpg',
