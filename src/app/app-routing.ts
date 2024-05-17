@@ -1,13 +1,13 @@
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
-  // {
-  //   path: '',
-  //   loadComponent: () =>
-  //     import('./pages/popup-window-caller/popup-window-caller.component').then(
-  //       (c) => c.PopupWindowCallerComponent
-  //     ),
-  // },
+  {
+    path: '',
+    loadComponent: () =>
+      import('./pages/popup-window-caller/popup-window-caller.component').then(
+        (c) => c.PopupWindowCallerComponent
+      ),
+  },
   // {
   //   path: 'element-attached',
   //   loadComponent: () =>
@@ -23,7 +23,7 @@ export const routes: Routes = [
   //     ).then((c) => c.DropSortingImplementationComponent),
   // },
   {
-    path: '',
+    path: 'native-dnd-api',
     loadComponent: () =>
       import(
         './pages/native-drag-and-drop-api/native-drag-and-drop-api.component'
@@ -32,9 +32,9 @@ export const routes: Routes = [
   {
     path: 'ag-grid',
     loadComponent: () =>
-      import('./pages/ag-grid-tutorial/ag-grid-tutorial.component').then(
-        (c) => c.AgGridTutorialComponent
-      ),
+      import(
+        './pages/ag-grid-tutorial/ag-grid-tutorial.component'
+      ).then((c) => c.AgGridTutorialComponent),
   },
   {
     path: '**',
