@@ -79,7 +79,7 @@ export class HostAttachedDirectiveWindowComponent implements OnInit {
 
   constructor() {
     effect(() => {
-      console.log('EFFECT RUNNING');
+      console.log('EFFECT LAUNCHED');
       // issue with current and previouse value for dragPosition in "hostCollapseToggle" handler
       this._cdkDrag.setFreeDragPosition(this._positionState().cur);
     });
@@ -124,8 +124,8 @@ export class HostAttachedDirectiveWindowComponent implements OnInit {
         cur: val.prev,
       }));
     } else {
-      this._hostHTMLElement?.classList.add('collapsed');
       this.setCollapsedpositiion();
+
     }
   }
 
@@ -150,16 +150,18 @@ export class HostAttachedDirectiveWindowComponent implements OnInit {
   // WIP *** WIP *** WIP
   // incorrect restored position
   private setCollapsedpositiion(): void {
+    this._hostHTMLElement?.classList.add('collapsed');
     const parentElement: HTMLElement | null =
       this._hostHTMLElement.parentElement;
     const currposition: Point = this._cdkDrag.getFreeDragPosition();
-
+  
     const positionState: PositionState = {
       prev: currposition,
       cur: currposition,
     };
 
     if (parentElement) {
+      console.log('IF', {currposition})
       positionState.cur.y =
         this._document.body.clientHeight -
         parentElement.offsetTop -
@@ -169,6 +171,8 @@ export class HostAttachedDirectiveWindowComponent implements OnInit {
       parentElement,
       y: positionState,
     });
+
     this._positionState.set(positionState);
+  
   }
 }
