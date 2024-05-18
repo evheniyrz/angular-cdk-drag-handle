@@ -147,7 +147,8 @@ export class HostAttachedDirectiveWindowComponent implements OnInit {
     }
     return initialPoint;
   }
-
+  // WIP *** WIP *** WIP
+  // incorrect restored position
   private setCollapsedpositiion(): void {
     const parentElement: HTMLElement | null =
       this._hostHTMLElement.parentElement;
@@ -164,7 +165,10 @@ export class HostAttachedDirectiveWindowComponent implements OnInit {
         parentElement.offsetTop -
         this._hostHTMLElement.clientHeight;
     }
-    console.log({ parentElement, y: positionState.cur.y });
+    console.log('incorrect restored position', {
+      parentElement,
+      y: positionState,
+    });
     this._positionState.set(positionState);
   }
 }
