@@ -3,31 +3,42 @@ import {
   ElementRef,
   EventEmitter,
   OnInit,
+  WritableSignal,
   inject,
+  signal,
 } from '@angular/core';
-import { CdkDrag, CdkDragDrop, CdkDragHandle, CdkDropList, CdkDropListGroup, Point, moveItemInArray } from '@angular/cdk/drag-drop';
+import {
+  CdkDrag,
+  CdkDragDrop,
+  CdkDragHandle,
+  CdkDropList,
+  CdkDropListGroup,
+  Point,
+  moveItemInArray,
+} from '@angular/cdk/drag-drop';
 import { AsyncPipe, DOCUMENT, NgTemplateOutlet } from '@angular/common';
 import { ItemColumnComponent } from '../item-column/item-column.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { BehaviorSubject } from 'rxjs';
 import { ColumnConfig } from '../models/column-config.model';
 @Component({
   selector: 'app-poup-window',
   standalone: true,
-  imports: [CdkDrag,
+  imports: [
+    CdkDrag,
     AsyncPipe,
     NgTemplateOutlet,
     MatButtonModule,
     CdkDropList,
     CdkDropListGroup,
-    MatIconModule, CdkDragHandle, ItemColumnComponent],
+    MatIconModule,
+    CdkDragHandle,
+    ItemColumnComponent,
+  ],
   hostDirectives: [
     {
       directive: CdkDrag,
-      inputs:[
-        'cdkDragBoundary'
-      ]
+      inputs: ['cdkDragBoundary'],
     },
   ],
   outputs: ['destroyPopup'],
@@ -37,20 +48,29 @@ import { ColumnConfig } from '../models/column-config.model';
 export class HostAttachedDirectiveWindowComponent implements OnInit {
   event: EventEmitter<string> = new EventEmitter();
   expanded = false;
-  columnConfigArray: Array<ColumnConfig> = Array.from({ length: 5 }, (_, index) => { return {colorLableValue:'green', title:`testDrive-${index + 1}`, description: `test drive#${index + 1}`, columnId: `testDrive-${index + 1}`}});
-
+  columnConfigArray: Array<ColumnConfig> = Array.from(
+    { length: 5 },
+    (_, index) => {
+      return {
+        colorLableValue: 'green',
+        title: `testDrive-${index + 1}`,
+        description: `test drive#${index + 1}`,
+        columnId: `testDrive-${index + 1}`,
+      };
+    }
+  );
 
   private _hostHTMLElement: HTMLElement = inject(ElementRef).nativeElement;
   private _document: Document = inject(DOCUMENT);
   private _cdkDrag: CdkDrag = inject(CdkDrag);
-  private _positionState: BehaviorSubject<Point> = new BehaviorSubject({
+
+  private _positionState: WritableSignal<Point> = signal({
     x: 0,
     y: 0,
   });
 
   ngOnInit(): void {
- 
-    this._cdkDrag.boundaryElement = 'body'; 
+    this._cdkDrag.boundaryElement = 'body';
 
     const x: number =
       (this._document.body.clientWidth - this._hostHTMLElement.clientWidth) / 2;
@@ -62,7 +82,11 @@ export class HostAttachedDirectiveWindowComponent implements OnInit {
   }
 
   dropColumn(event: CdkDragDrop<any[]>) {
-    moveItemInArray(this.columnConfigArray, event.previousIndex, event.currentIndex);
+    moveItemInArray(
+      this.columnConfigArray,
+      event.previousIndex,
+      event.currentIndex
+    );
   }
 
   public destroyHost(): void {
@@ -82,11 +106,11 @@ export class HostAttachedDirectiveWindowComponent implements OnInit {
   public hostCollapseToggle(): void {
     if (this._hostHTMLElement?.classList.contains('collapsed')) {
       this._hostHTMLElement?.classList.remove('collapsed');
-      this._cdkDrag.setFreeDragPosition(this._positionState.getValue());
+      this._cdkDrag.setFreeDragPosition(this._positionState());
     } else {
       this._hostHTMLElement?.classList.add('collapsed');
 
-      this._positionState.next({
+      this._positionState.set({
         ...this._cdkDrag.getFreeDragPosition(),
       });
 

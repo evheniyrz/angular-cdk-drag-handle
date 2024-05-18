@@ -1,4 +1,10 @@
-import { Component, ComponentRef, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ComponentRef,
+  OnInit,
+  ViewChild,
+  effect,
+} from '@angular/core';
 import { HostAttachedDirectiveWindowComponent } from 'src/app/components/host-attached-directive/host-attached-directive.component';
 import {
   CdkPortalOutlet,
@@ -18,6 +24,11 @@ export class PopupWindowCallerComponent implements OnInit {
   @ViewChild(CdkPortalOutlet) cdkPortal!: CdkPortalOutlet;
 
   componentPortal!: ComponentPortal<HostAttachedDirectiveWindowComponent>;
+  constructor() {
+    effect(() => {
+      console.log(`The singnal is called`);
+    });
+  }
 
   recieveReference(ref: CdkPortalOutletAttachedRef): void {
     (
