@@ -148,29 +148,31 @@ export class HostAttachedDirectiveWindowComponent implements OnInit {
     return initialPoint;
   }
   // WIP *** WIP *** WIP
-  // incorrect restored position
   private setCollapsedpositiion(): void {
     this._hostHTMLElement?.classList.add('collapsed');
+
     const parentElement: HTMLElement | null =
       this._hostHTMLElement.parentElement;
+
     const currposition: Point = this._cdkDrag.getFreeDragPosition();
-  
-    const positionState: PositionState = {
+
+    let positionState: PositionState = {
       prev: currposition,
       cur: currposition,
     };
 
     if (parentElement) {
-      console.log('IF', {currposition})
-      positionState.cur.y =
-        this._document.body.clientHeight -
-        parentElement.offsetTop -
-        this._hostHTMLElement.clientHeight;
+      positionState=
+        {
+          ...positionState,
+          cur:{
+            ...positionState.cur,
+            y: this._document.body.clientHeight -
+            parentElement.offsetTop -
+            this._hostHTMLElement.clientHeight
+          }
+        };
     }
-    console.log('incorrect restored position', {
-      parentElement,
-      y: positionState,
-    });
 
     this._positionState.set(positionState);
   
