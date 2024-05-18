@@ -24,11 +24,7 @@ export class PopupWindowCallerComponent implements OnInit {
   @ViewChild(CdkPortalOutlet) cdkPortal!: CdkPortalOutlet;
 
   componentPortal!: ComponentPortal<HostAttachedDirectiveWindowComponent>;
-  constructor() {
-    effect(() => {
-      console.log(`The singnal is called`);
-    });
-  }
+  constructor() {}
 
   recieveReference(ref: CdkPortalOutletAttachedRef): void {
     (

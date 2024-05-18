@@ -102,7 +102,7 @@ export class NativeDragAndDropApiComponent implements AfterViewInit, OnDestroy {
       'dragend',
       dragEndHandler
     );
-    this.onDestroy$.next();
-    this.onDestroy$.complete();
+    // this.onDestroy$.next();
+    // this.onDestroy$.complete();
   }
 }
