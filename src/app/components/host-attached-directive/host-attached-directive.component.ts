@@ -163,9 +163,7 @@ export class HostAttachedDirectiveWindowComponent implements OnInit {
     if (parentElement) {
       const shouldCollapsedToTop: boolean = positionState.cur.y < 0;
       positionState.cur.y = shouldCollapsedToTop
-        ? this._document.body.clientHeight +
-          parentElement.offsetTop +
-          this._hostHTMLElement.clientHeight
+        ? positionState.cur.y - (positionState.cur.y + parentElement.offsetTop)
         : this._document.body.clientHeight -
           parentElement.offsetTop -
           this._hostHTMLElement.clientHeight;
