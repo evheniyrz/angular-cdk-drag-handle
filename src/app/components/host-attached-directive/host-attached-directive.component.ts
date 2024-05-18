@@ -125,7 +125,6 @@ export class HostAttachedDirectiveWindowComponent implements OnInit {
       }));
     } else {
       this.setCollapsedpositiion();
-
     }
   }
 
@@ -158,23 +157,16 @@ export class HostAttachedDirectiveWindowComponent implements OnInit {
 
     let positionState: PositionState = {
       prev: currposition,
-      cur: currposition,
+      cur: { ...currposition },
     };
 
     if (parentElement) {
-      positionState=
-        {
-          ...positionState,
-          cur:{
-            ...positionState.cur,
-            y: this._document.body.clientHeight -
-            parentElement.offsetTop -
-            this._hostHTMLElement.clientHeight
-          }
-        };
+      positionState.cur.y =
+        this._document.body.clientHeight -
+        parentElement.offsetTop -
+        this._hostHTMLElement.clientHeight;
     }
 
     this._positionState.set(positionState);
-  
   }
 }
