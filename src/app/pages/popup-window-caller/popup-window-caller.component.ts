@@ -3,7 +3,6 @@ import {
   ComponentRef,
   OnInit,
   ViewChild,
-  effect,
 } from '@angular/core';
 import { HostAttachedDirectiveWindowComponent } from 'src/app/components/host-attached-directive/host-attached-directive.component';
 import {

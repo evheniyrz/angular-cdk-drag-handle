@@ -17,7 +17,7 @@ import {
   Point,
   moveItemInArray,
 } from '@angular/cdk/drag-drop';
-import { AsyncPipe, DOCUMENT, NgTemplateOutlet } from '@angular/common';
+import { DOCUMENT } from '@angular/common';
 import { ItemColumnComponent } from '../item-column/item-column.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -28,8 +28,6 @@ import { PositionState } from './position-state.model';
   standalone: true,
   imports: [
     CdkDrag,
-    AsyncPipe,
-    NgTemplateOutlet,
     MatButtonModule,
     CdkDropList,
     CdkDropListGroup,

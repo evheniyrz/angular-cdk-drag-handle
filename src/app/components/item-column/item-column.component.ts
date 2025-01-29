@@ -1,5 +1,5 @@
-import { Component, Input, OnDestroy, OnInit, inject } from '@angular/core';
-import { AsyncPipe, NgClass } from '@angular/common';
+import { Component, Input, OnInit } from '@angular/core';
+import { NgClass } from '@angular/common';
 import {
   CdkMenu,
   CdkMenuTrigger,
@@ -8,7 +8,6 @@ import {
 } from '@angular/cdk/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { Subject } from 'rxjs';
 import {
   CdkDrag,
   CdkDragDrop,
@@ -18,7 +17,6 @@ import {
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
-import { takeUntil, tap } from 'rxjs/operators';
 import { ColumnConfig } from '../models/column-config.model';
 
 @Component({
@@ -27,8 +25,6 @@ import { ColumnConfig } from '../models/column-config.model';
   imports: [
     NgClass,
     CdkDropList,
-    AsyncPipe,
-    CdkDrag,
     CdkDragPlaceholder,
     CdkMenu,
     CdkMenuTrigger,
